@@ -1,0 +1,98 @@
+{
+  "info": {
+    "name": "Shoe Laundry API (Supabase + Express.js)",
+    "_postman_id": "b8c13e8f-04f4-44c1-97e2-9b23f0b2f1c2",
+    "description": "API CRUD untuk layanan cuci sepatu. Mendukung filter status, barang masuk, dan barang keluar. Backend menggunakan Node.js + Express.js + Supabase.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Items",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/items"
+      }
+    },
+    {
+      "name": "Get Items by Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/items?status=Keluar"
+      }
+    },
+    {
+      "name": "Get Item by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/items/1"
+      }
+    },
+    {
+      "name": "Create Item (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Nike Air Max\",\n  \"brand\": \"Nike\",\n  \"owner_name\": \"Budi Santoso\",\n  \"note\": \"Cuci + Repaint\"\n}"
+        },
+        "url": "{{base_url}}/api/items"
+      }
+    },
+    {
+      "name": "Update Item (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Selesai\",\n  \"note\": \"Sudah dicuci dan siap diambil\"\n}"
+        },
+        "url": "{{base_url}}/api/items/1"
+      }
+    },
+    {
+      "name": "Delete Item (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/api/items/1"
+      }
+    },
+    {
+      "name": "Barang Masuk (POST)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{base_url}}/api/items/1/masuk"
+      }
+    },
+    {
+      "name": "Barang Keluar (POST)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{base_url}}/api/items/1/keluar"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
