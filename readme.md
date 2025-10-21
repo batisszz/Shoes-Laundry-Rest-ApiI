@@ -48,8 +48,151 @@ Tabel: `items`
 
 ## 🧠 Contoh Request & Response
 
-### 1️⃣ Tambah Barang (POST)
+### 1. Tambah Barang (POST)
 **Request**
 ```http
 POST /api/items
 Content-Type: application/json
+{
+  "name": "Nike Air Max",
+  "brand": "Nike",
+  "owner_name": "Budi Santoso",
+  "note": "Cuci + Repaint"
+}
+```
+**Response**
+```
+{
+  "id": 12,
+  "name": "Nike Air Max",
+  "brand": "Nike",
+  "owner_name": "Budi Santoso",
+  "status": "Dalam Proses",
+  "note": "Cuci + Repaint",
+  "date_in": "2025-10-21T07:00:00.000Z",
+  "created_at": "2025-10-21T07:00:00.000Z"
+}
+```
+### 2. Barang Masuk
+**Request**
+```http
+POST /api/items/12/masuk
+```
+**Response**
+```
+{
+  "message": "Barang telah masuk",
+  "item": {
+    "id": 12,
+    "status": "Masuk",
+    "date_in": "2025-10-21T07:10:00.000Z"
+  }
+}
+```
+### 3. Barang Keluar
+**Request**
+```http
+POST /api/items/12/keluar
+```
+**Response**
+```
+{
+  "message": "Barang telah keluar",
+  "item": {
+    "id": 12,
+    "status": "Keluar",
+    "date_out": "2025-10-21T08:00:00.000Z"
+  }
+}
+```
+### 4. Ambil Semua Barang
+**Request**
+```http
+GET /api/items
+```
+**Response**
+```
+[
+  {
+    "id": 12,
+    "name": "Nike Air Max",
+    "status": "Dalam Proses",
+    "owner_name": "Budi Santoso"
+  }
+]
+```
+### 5. Filter Status
+**Request**
+```http
+GET /api/items?status=Keluar
+```
+**Response**
+```
+[
+  {
+    "id": 15,
+    "name": "Converse All Star",
+    "status": "Keluar",
+    "owner_name": "Rian Nugraha"
+  }
+]
+```
+### 6. Hapus Barang
+**Request**
+```http
+DELETE /api/items/12
+```
+**Response**
+```
+{ "message": "Item berhasil dihapus" }
+```
+
+🧩 Struktur Folder Proyek
+```
+shoe-laundry-api/
+├── api/
+│   └── index.js          # Entry point untuk Vercel
+├── src/
+│   ├── app.js            # Setup Express App
+│   ├── db/
+│   │   └── supabaseClient.js
+│   └── routes/
+│       └── items.js
+├── package.json
+├── vercel.json
+├── .env
+└── README.md
+```
+⚙️ Instalasi & Menjalankan Secara Lokal
+1️⃣ Clone Repository
+git clone https://github.com/batisszz/shoes-laundry-rest-api.git
+cd shoes-laundry-api
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Setup Environment Variables
+
+Buat file .env dan isi:
+```
+SUPABASE_URL=https://imzbdqwqmhvvfrcwhnwy.supabase.co
+SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltemJkcXdxbWh2dmZyY3dobnd5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDk5NjYxOCwiZXhwIjoyMDc2NTcyNjE4fQ.uN_z1dsjXUQpBzwg1NF-aerXEr4hjB5DjAWLtXOU_cw
+```
+PORT=3000
+
+4️⃣ Jalankan Server
+npm run dev
+
+API akan berjalan di:
+👉 http://localhost:3000
+
+🌐 Deploy ke Vercel
+1. Commit proyek ke GitHub.
+2. Buka Vercel Dashboard
+3. Import repository dari GitHub.
+4. Tambahkan variabel environment di menu Project Settings → Environment Variables:
+```
+SUPABASE_URL=https://imzbdqwqmhvvfrcwhnwy.supabase.co
+SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltemJkcXdxbWh2dmZyY3dobnd5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDk5NjYxOCwiZXhwIjoyMDc2NTcyNjE4fQ.uN_z1dsjXUQpBzwg1NF-aerXEr4hjB5DjAWLtXOU_cw
+```
+5. Klik Deploy 🚀
