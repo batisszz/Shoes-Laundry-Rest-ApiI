@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Health check
-app.get('/', (req, res) => res.json({ ok: true, service: 'shoe-laundry-api' }));
+app.get('/', (req, res) => res.json({ ok: true, service: 'shoes-laundry-api' }));
 
 // API routes
 app.use('/api/items', itemsRouter);
